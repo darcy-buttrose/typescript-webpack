@@ -1,0 +1,10 @@
+﻿{
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "preserve"
+  },
+  "files": [
+    "app/entry.tsx",
+    "typings/tsd.d.ts"
+  ]
+}

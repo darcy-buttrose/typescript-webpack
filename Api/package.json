@@ -1,0 +1,20 @@
+{
+  "name": "Api",
+  "version": "0.0.0",
+  "description": "Api",
+  "main": "server.js",
+  "author": {
+    "name": "Darcy",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "falcor": "^0.1.13",
+    "falcor-express": "^0.1.2",
+    "falcor-json-graph": "^2.0.0",
+    "falcor-router": "^0.2.9",
+    "cors": "^2.7.1",
+    "body-parser": "^1.14.1",
+    "underscore": "^1.8.3"
+  }
+}
