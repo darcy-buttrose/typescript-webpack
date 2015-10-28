@@ -1,10 +1,11 @@
 ﻿/**
  * Created by Darcy on 13/10/2015.
  */
-import falcor from 'falcor';
-import jsonGraph from 'falcor-json-graph';
-import router from 'falcor-router';
-import _ from 'underscore';
+///<reference path="./typings/tsd.d.ts"/>
+import * as falcor from 'falcor';
+import * as jsonGraph from 'falcor-json-graph';
+import * as router from 'falcor-router';
+import * as _ from 'underscore';
 
 var $ref = jsonGraph.ref;
 var $error = jsonGraph.error;
@@ -24,12 +25,20 @@ var todos = [
     }
 ];
 
-const TodoRouterBase = router.createClass([{
-        route: "todos.length",
-        get: () => {
-            return {path: ["todos","length"], value: todos.length};
+interface IJsonGraphArg {
+    [name: string]: {
+        [id: string]: {
+            [prop: string]: string
         }
-    },
+    }
+}
+
+export default class TodoRouterBase extends router.createClass([{
+    route: "todos.length",
+    get: () => {
+        return { path: ["todos", "length"], value: todos.length };
+    }
+},
     {
         route: "todos[{integers:ids}].['name','done']",
         get: (pathSet) => {
@@ -38,9 +47,9 @@ const TodoRouterBase = router.createClass([{
             pathSet.ids.forEach((id) => {
                 console.log('todoRouter[get] => id=' + id);
                 var task = todos[id];
-               pathSet[2].forEach((key) => {
+                pathSet[2].forEach((key) => {
                     results.push({
-                        path: ['todos',id,key],
+                        path: ['todos', id, key],
                         value: todos[id][key]
                     });
                 });
@@ -48,7 +57,7 @@ const TodoRouterBase = router.createClass([{
 
             return results;
         },
-        set: (jsonGraphArg) => {
+        set: (jsonGraphArg: IJsonGraphArg) => {
 
             console.log('todoRouter[set] => ' + JSON.stringify(jsonGraphArg));
             var jsonGraphArg2 = jsonGraphArg['todos'];
@@ -56,13 +65,13 @@ const TodoRouterBase = router.createClass([{
 
             var results = [];
 
-            _.each(jsonGraphArg2,(todo,id) => {
+            _.each(jsonGraphArg2, (todo, id) => {
                 console.log('todoRouter[set return] => id=' + id);
-                _.each(todo,(val,prop) => {
+                _.each(todo, (val, prop) => {
                     console.log('todoRouter[set return] => key=' + prop + ' value=' + val);
                     todos[id][prop] = val;
                     results.push({
-                        path: ['todos',id,prop],
+                        path: ['todos', id, prop],
                         value: val
                     });
                 });
@@ -71,10 +80,8 @@ const TodoRouterBase = router.createClass([{
             return results;
         }
     }
-]);
-
-export default class TodoRouter extends TodoRouterBase {
-    constructor(){
+]) {
+    constructor() {
         super();
-   }
+    }
 }

@@ -1,12 +1,13 @@
 ﻿/* eslint no-console: 0 */
-import express from 'express';
-import cors from 'cors';
-import falcorExpress from 'falcor-express';
-import bodyParser from 'body-parser';
+///<reference path="./typings/tsd.d.ts"/>
+import * as express from 'express';
+import * as cors from 'cors';
+import * as falcorExpress from 'falcor-express';
+import * as bodyParser from 'body-parser';
 
 import todoRouter from './todo-router';
 
-const port = process.env.PORT;
+const port = process.env.PORT != null ? process.env.PORT : 1337;
 const app = express();
 
 app.use(cors({
@@ -16,4 +17,5 @@ app.use(cors({
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/model.json',falcorExpress.dataSourceRoute(() => new todoRouter()));
 
+console.log('port => ' + port)
 app.listen(port);
