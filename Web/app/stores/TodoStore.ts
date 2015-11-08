@@ -25,7 +25,7 @@ interface RemoteTask {
 }
 
 let todoModel = new falcor.Model({
-    source: new falcorDataSource('http://localhost:1337/model.json')
+    source: new falcorDataSource('http://localhost:60266/model.json')
 });
 
 var TodoStore = assign({}, EventEmitter.prototype, {
