@@ -1,13 +1,13 @@
-﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Falcor;
 using Falcor.Server;
 using Falcor.Server.Routing;
+using Types;
 
-namespace OwinApi
+namespace Routes
 {
     public class TodoRouter : FalcorRouter
     {
@@ -32,30 +32,26 @@ namespace OwinApi
 
         public TodoRouter()
         {
-            Get["todos.length"] = async parameters =>
+            Get["todos.length"] = parameters =>
             {
-                var result = await Task.FromResult(Path("todos").Key("length").Atom(todos.Count()));
+                var result = Path("todos").Key("length").Atom(todos.Count());
                 return Complete(result);
             };
-            Get["todos[{integers:ids}].['name','done']"] = async parameters =>
+            Get["todos[{ranges:ids}].name"] = parameters =>
             {
-                List<int> ids = parameters.ids;
+                NumberRange ids = parameters.ids;
 
-                var result = await Task.FromResult(ids.Select(id =>
+                var result = ids.Select(id => new PathValue(FalcorPath.From("todos", id), new[]
                 {
-                    var pathValueDefinedResult = Path("todos", id)
-                        .Key("name").Atom(todos[id].name)
-                        .Key("done").Atom(todos[id].done);
-                    return pathValueDefinedResult;
+                    new PathValue(FalcorPath.From(id,"name"), todos[id].name), 
+                    new PathValue(FalcorPath.From(id,"done"), todos[id].done) 
                 }));
                 return Complete(result);
             };
         }
-    }
+        // Test helper methods
+        public static Task<RouteHandlerResult> Complete(params PathValue[] values) => Complete(values.ToList());
 
-    internal class TodoItem
-    {
-        public string name { get; set; }
-        public bool done { get; set; }
+        public static Task<RouteHandlerResult> Complete(IEnumerable<PathValue> values) => Task.FromResult(FalcorRouter.Complete(values.ToList()));
     }
 }

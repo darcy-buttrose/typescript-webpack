@@ -4,6 +4,7 @@ using Falcor.Server.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
+using Routes;
 
 [assembly: OwinStartup(typeof(OwinApi.Startup))]
 

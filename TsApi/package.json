@@ -1,0 +1,10 @@
+{
+  "name": "TsApi",
+  "version": "0.0.0",
+  "description": "TsApi",
+  "main": "app.js",
+  "author": {
+    "name": "Darcy",
+    "email": ""
+  }
+}
