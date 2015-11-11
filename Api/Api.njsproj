@@ -42,6 +42,7 @@
     <Folder Include="typings\" />
     <Folder Include="typings\body-parser\" />
     <Folder Include="typings\cors\" />
+    <Folder Include="typings\express\" />
     <Folder Include="typings\falcor-express\" />
     <Folder Include="typings\falcor\" />
     <Folder Include="typings\mime\" />
@@ -54,6 +55,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="typings\body-parser\body-parser.d.ts" />
     <TypeScriptCompile Include="typings\cors\cors.d.ts" />
+    <TypeScriptCompile Include="typings\express\express.d.ts" />
     <TypeScriptCompile Include="typings\falcor-express\falcor-express.d.ts" />
     <TypeScriptCompile Include="typings\falcor-json-graph\falcor-json-graph.d.ts" />
     <TypeScriptCompile Include="typings\falcor-router\falcor-router.d.ts" />
