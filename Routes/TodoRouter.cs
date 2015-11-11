@@ -32,26 +32,21 @@ namespace Routes
 
         public TodoRouter()
         {
-            Get["todos.length"] = parameters =>
+            Get["todos.length"] = async parameters =>
             {
-                var result = Path("todos").Key("length").Atom(todos.Count());
+                var result = await Task.FromResult(Path("todos").Key("length").Atom(todos.Count()));
                 return Complete(result);
             };
-            Get["todos[{ranges:ids}].name"] = parameters =>
+            Get["todos[{ranges:ids}][{keys:props}]"] = async parameters =>
             {
                 NumberRange ids = parameters.ids;
+                KeySet props = parameters.props;
 
-                var result = ids.Select(id => new PathValue(FalcorPath.From("todos", id), new[]
-                {
-                    new PathValue(FalcorPath.From(id,"name"), todos[id].name), 
-                    new PathValue(FalcorPath.From(id,"done"), todos[id].done) 
-                }));
+                //var result = await Task.FromResult(ids.Select(id => new PathValue(FalcorPath.From("todos", id,"name"),todos[id].name)));
+                //var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("name").Atom(todos[id].name)));
+                var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("name").Atom(todos[id].name).Key("done").Atom(todos[id].done)));
                 return Complete(result);
             };
         }
-        // Test helper methods
-        public static Task<RouteHandlerResult> Complete(params PathValue[] values) => Complete(values.ToList());
-
-        public static Task<RouteHandlerResult> Complete(IEnumerable<PathValue> values) => Task.FromResult(FalcorRouter.Complete(values.ToList()));
     }
 }

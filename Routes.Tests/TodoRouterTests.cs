@@ -7,6 +7,7 @@ using Falcor;
 using Falcor.Server.Routing;
 using NUnit.Framework;
 using Types;
+using Newtonsoft.Json;
 
 namespace Routes.Tests
 {
@@ -24,11 +25,12 @@ namespace Routes.Tests
         [Test]
         public void ShouldReturnListOfTodoItems()
         {
-            var request = FalcorRequest.Get("todos", new NumberRange(0, 2), "name");
+            //var request = FalcorRequest.Get("todos", new NumberRange(0, 2), "name");
+            var request = FalcorRequest.Get("todos", new NumberRange(0, 2), new KeySet("done","name"));
             var response = _routerUnderTest.RouteAsync(request).Result;
-            var todos = (Dictionary<string,object>) response.JsonGraph["todos"];
+            var todos = JsonConvert.SerializeObject(response);
 
-            Assert.That(todos.Count, Is.EqualTo(3));
+            Assert.That(todos, Is.Not.ContainsSubstring("error"));
         }
     }
 }
