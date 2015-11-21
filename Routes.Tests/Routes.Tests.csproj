@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Falcor">
-      <HintPath>..\packages\Falcor.0.1.2-alpha-1\lib\net45\Falcor.dll</HintPath>
+      <HintPath>..\falcor\Falcor\bin\Debug\Falcor.dll</HintPath>
     </Reference>
     <Reference Include="Falcor.Server">
-      <HintPath>..\packages\Falcor.Server.0.1.2-alpha-1\lib\net45\Falcor.Server.dll</HintPath>
+      <HintPath>..\falcor\Falcor.Server\bin\Debug\Falcor.Server.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>

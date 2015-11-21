@@ -43,18 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Falcor, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Falcor.0.1.2-alpha-1\lib\net45\Falcor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Falcor.Server, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Falcor.Server.0.1.2-alpha-1\lib\net45\Falcor.Server.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Falcor.Server.Owin, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Falcor.Server.Owin.0.1.2-alpha-1\lib\net45\Falcor.Server.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -138,6 +126,18 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\falcor\Falcor.Server.Owin\Falcor.Server.Owin.csproj">
+      <Project>{932d3a57-ccc8-466d-8fbd-1c1833661ed8}</Project>
+      <Name>Falcor.Server.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\falcor\Falcor.Server\Falcor.Server.csproj">
+      <Project>{89cd64b4-7b29-4b69-94e1-06d1f974297d}</Project>
+      <Name>Falcor.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\falcor\Falcor\Falcor.csproj">
+      <Project>{cf5c06be-467b-40ba-8f60-0f292fa067a2}</Project>
+      <Name>Falcor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Routes\Routes.csproj">
       <Project>{E59AB53C-33A3-49FD-B430-E5AD72E21EB2}</Project>
       <Name>Routes</Name>

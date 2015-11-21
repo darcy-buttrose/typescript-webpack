@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Falcor, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Falcor.0.1.2-alpha-1\lib\net45\Falcor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Falcor.Server, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Falcor.Server.0.1.2-alpha-1\lib\net45\Falcor.Server.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -76,6 +68,14 @@
     <Compile Include="TodoRouter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\falcor\Falcor.Server\Falcor.Server.csproj">
+      <Project>{89cd64b4-7b29-4b69-94e1-06d1f974297d}</Project>
+      <Name>Falcor.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\falcor\Falcor\Falcor.csproj">
+      <Project>{cf5c06be-467b-40ba-8f60-0f292fa067a2}</Project>
+      <Name>Falcor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Types\Types.csproj">
       <Project>{37f64025-0c1b-4374-b613-26e49b81f484}</Project>
       <Name>Types</Name>

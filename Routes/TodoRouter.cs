@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Falcor;
 using Falcor.Server;
@@ -21,7 +23,7 @@ namespace Routes
             new TodoItem
             {
                 name= "froth milk",
-                done= false
+                done= true
             },
             new TodoItem
             {
@@ -45,6 +47,39 @@ namespace Routes
                 //var result = await Task.FromResult(ids.Select(id => new PathValue(FalcorPath.From("todos", id,"name"),todos[id].name)));
                 //var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("name").Atom(todos[id].name)));
                 var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("name").Atom(todos[id].name).Key("done").Atom(todos[id].done)));
+                return Complete(result);
+            };
+            Set["todos[{integers:ids}].done"] = async parameters =>
+            {
+                try
+                {
+                    NumericSet ids = parameters.ids;
+                    dynamic jsonGraph = parameters.jsonGraph;
+
+                    ids.ToList().ForEach(id =>
+                    {
+                        todos[id].done = (bool)jsonGraph["todos"][id.ToString()]["done"];
+                    });
+
+                    var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("done").Atom(todos[id].done)));
+                    return Complete(result);
+                }
+                catch(Exception ex)
+                {
+                    return null;
+                }
+            };
+            Set["todos[{integers:ids}].name"] = async parameters =>
+            {
+                NumericSet ids = parameters.ids;
+                dynamic jsonGraph = parameters.jsonGraph;
+
+                ids.ToList().ForEach(id =>
+                {
+                    todos[id].name = jsonGraph.todos[id].name;
+                });
+
+                var result = await Task.FromResult(ids.Select(id => Path("todos", id).Key("name").Atom(todos[id].name)));
                 return Complete(result);
             };
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Falcor.Server;
 using Falcor.Server.Owin;
+using Falcor.Server.Routing;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
@@ -15,7 +17,10 @@ namespace OwinApi
         public void Configuration(IAppBuilder app)
         {
             app.UseCors(CorsOptions.AllowAll);
-            app.UseFalcor("/model.json", routerFactory: config => new TodoRouter());
+            app.UseFalcor("/model.json", (arg) =>
+            {
+                return new TodoRouter();
+            });
         }
     }
 }
